@@ -3,6 +3,24 @@ import starlight from "@astrojs/starlight";
 import starlightLinksValidator from "starlight-links-validator";
 import { sidebar } from "./src/data/sidebar.mjs";
 import previewBanner from "./scripts/preview-banner.mjs";
+import { existsSync, statSync } from "node:fs";
+
+// The static pages in public/ (the 1.0 milestone) are folders with an
+// index.html. GitHub Pages serves /milestone/1.0 from the folder; the dev
+// server doesn't, so map those URLs to their index.html while developing.
+// (Links use the slash-free form, matching trailingSlash: "never".)
+const publicFolderIndex = {
+  name: "public-folder-index",
+  configureServer(server) {
+    server.middlewares.use((req, _res, next) => {
+      const [path, query = ""] = (req.url ?? "").split("?");
+      if (path !== "/" && existsSync(`public${path}/index.html`) && statSync(`public${path}`).isDirectory()) {
+        req.url = `${path}/index.html${query ? `?${query}` : ""}`;
+      }
+      next();
+    });
+  },
+};
 
 // Canonical URL for the deployed site. Used for OpenGraph and sitemap.
 // The actual hosting (GitHub Pages on the silo-server.github.io repo)
@@ -28,10 +46,21 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: "silo docs",
+      title: "Silo docs",
       description:
         "Documentation for installing, configuring, and operating Silo.",
       favicon: "/favicon.ico",
+      // Link previews: the Silo wordmark card, at an absolute URL, as on the
+      // marketing pages. Starlight already asks for the large card.
+      head: [
+        {
+          tag: "meta",
+          attrs: { property: "og:image", content: new URL(`${base.replace(/\/$/, "")}/social-card.png`, site).href },
+        },
+        { tag: "meta", attrs: { property: "og:image:width", content: "1200" } },
+        { tag: "meta", attrs: { property: "og:image:height", content: "630" } },
+        { tag: "meta", attrs: { property: "og:image:alt", content: "Silo" } },
+      ],
       lastUpdated: true,
       customCss: ["./src/styles/docs.css"],
       editLink: {
@@ -65,6 +94,9 @@ export default defineConfig({
     }),
     previewBanner(),
   ],
+  vite: {
+    plugins: [publicFolderIndex],
+  },
   build: {
     assets: "_astro",
     // Write pages as docs/page.html rather than docs/page/index.html, so

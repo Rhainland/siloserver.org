@@ -19,18 +19,21 @@ Node 20+ also works; Bun is preferred for parity with the site's build tooling.
 
 ```
 src/
-├── components/    one .astro file per page section + small reusables
+├── assets/home/   artwork for the homepage mockups and the rooms around them
+├── components/
+│   ├── home/      homepage sections, site header, and footer
+│   ├── mock/      Silo app screens (tvOS, iPhone) rebuilt for the homepage
+│   └── PolicyPage.astro  shell for /privacy and /account-deletion
 ├── content/docs/  Starlight docs content — Markdown under docs/
 ├── data/          content + config — edit copy here, not in templates
 │   ├── siteConfig.ts   site-wide constants (name, license, repo names)
-│   ├── pillars.ts      infrastructure pillars (section 01)
-│   ├── features.ts     feature grid (section 02)
-│   ├── clients.ts      native clients + Jellyfin-compat list (section 04)
-│   ├── faq.ts          FAQ items (section 05)
-│   └── releases.ts     build-time fetch of latest GitHub releases
-├── layouts/       base layout — head, fonts, shell
+│   ├── home.ts         homepage copy and mockup content
+│   └── download.ts     apps and server install on /download
+├── layouts/       Marketing.astro (head, fonts, shell) and MarketingPage.astro
 ├── pages/         file-based routing — index.astro is the homepage
-└── styles/global.css   the entire design system
+├── scripts/home.ts  homepage motion: hero focus, library, pinned scroll scene
+└── styles/        marketing.css (site design), mock.css (app mockups),
+                   docs.css (Starlight theme)
 ```
 
 ## Editing content
@@ -38,16 +41,14 @@ src/
 | To change                       | Edit                                      |
 | ------------------------------- | ----------------------------------------- |
 | Site name, license, repo URLs   | `src/data/siteConfig.ts`                  |
-| Infrastructure pillar copy      | `src/data/pillars.ts`                     |
-| Feature card copy + chips       | `src/data/features.ts`                    |
-| Client list (native or compat)  | `src/data/clients.ts`                     |
-| FAQ items                       | `src/data/faq.ts`                         |
-| Hero subhead, status bar nav    | `src/components/Hero.astro`, `StatusBar.astro` |
-| Architecture diagrams           | `src/components/Deployment.astro`         |
+| Homepage copy, setup steps, FAQ | `src/data/home.ts`                        |
+| Mockup titles and metadata      | `src/data/home.ts` (see its header note)  |
+| Download page apps              | `src/data/download.ts`                    |
+| Header and footer links         | `src/components/home/SiteHeader.astro`, `SiteFooter.astro` |
 | Documentation pages             | `src/content/docs/docs/**/*.md`           |
 | Documentation sidebar           | `src/data/sidebar.mjs`                    |
 | Old documentation URLs          | `src/data/docs-redirects.mjs`              |
-| Colors, spacing, typography     | `src/styles/global.css`                   |
+| Colors, spacing, typography     | `src/styles/marketing.css`                |
 
 Almost every copy change is a data-file edit, not a markup edit. That's
 deliberate — the components don't need to be touched unless the layout
@@ -135,23 +136,6 @@ published URLs with direct redirects when changing slugs.
 The extra nested `docs/` directory is intentional: Starlight routes pages
 from `src/content/docs/`, so nesting the public docs there gives the site
 the `/docs` URL prefix while keeping everything in the same Astro project.
-
-## Release links on client cards
-
-The client cards in section 04 link to the latest release of each app repo
-(`silo-server`, `silo-apple`, `silo-android`). These are fetched from the
-GitHub API at build time by `src/data/releases.ts` and baked into the
-static HTML — no client-side JS, no runtime API calls. Cards show a plain
-status (shipping or beta) and never a version number.
-
-The data is refreshed on three triggers:
-
-1. Every push to `main`
-2. Every 6 hours via a scheduled workflow
-3. Every time a sibling repo publishes a release (cross-repo dispatch)
-
-If the API is unreachable or rate-limited at build time, cards fall back
-to the repo home page instead. The build never fails for this reason.
 
 ## Cross-repo release dispatch
 
@@ -311,20 +295,17 @@ Purge permission for this zone. It is sent only to Cloudflare's API.
 
 ## Design system
 
-The site uses an industrial-datasheet aesthetic: warm paper surfaces,
-ink hairline tables, blueprint figures, and a single dark "instrument
-console" panel in the hero. Three typefaces (loaded from Google Fonts
-at runtime):
+The site is dark only, set in Plus Jakarta Sans (loaded from Google Fonts at
+runtime), with Silo's blue, red, and orange as accent light. The homepage
+shows the product itself: its mockups rebuild real Silo screens from the
+tvOS and iOS app source at real device ratios, so check a label or layout
+against the files listed at the top of `src/data/home.ts` before changing it.
+The hero and the pinned TV-and-phone scene sit in painted rooms; every other
+page uses the docs' dark theme.
 
-- **Big Shoulders** — display, condensed industrial
-- **Archivo** — body
-- **IBM Plex Mono** — code, spec labels, status
-
-Colors live as CSS custom properties at the top of `src/styles/global.css`.
-The official horizontal wordmark is rendered by `BrandLockup` and the
-downloadable originals live under `public/brand/`. Three skewed bars in blue,
-red, and orange recur as a decorative (non-logo) motif via `SiloBars`. The
-Starlight docs are themed to match via `src/styles/docs.css`.
+Colors live as CSS custom properties at the top of `src/styles/marketing.css`.
+The downloadable logo originals live under `public/brand/`. The Starlight docs
+are themed via `src/styles/docs.css`.
 
 ## License & Trademarks
 
