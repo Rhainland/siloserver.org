@@ -35,7 +35,7 @@ While it's on, adding such a title to a watchlist requests it for that person, o
 
 ## Connect an acquisition service
 
-External services are optional. Install the service's [plugin](/docs/plugins) first. In **Admin > Settings > Requests**, under **Servers**, choose **Add server**, pick the plugin under **Server type**, and enter the service's **URL** and **API key**. Choose the destination and quality options, then save.
+External services are optional. Install the service's [plugin](/docs/plugins) first. In **Admin > Settings > Requests**, under **Servers**, choose **Add server**, pick the plugin under **Server type**, and enter the service's **URL** and **API key**. Some plugins don't need one or both; the form marks those fields optional. Choose the destination and quality options, then save.
 
 Test with one approved request, and look for it in both Silo and the external service.
 
