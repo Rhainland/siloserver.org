@@ -31,11 +31,20 @@ Until the lock ends, even the right PIN is refused. The web app says
 
 ### In the web app
 
-From the primary profile, open **Settings > Profiles**. The page lists every
-profile with **Use** (switch to it), **Edit**, and **Delete**. You can't
-delete the primary profile or the profile you're using.
+On **Who's watching?**, select **Add profile** or **Manage profiles**. If the
+primary profile has a PIN, enter it.
 
-1. Select **New profile**, or **Edit** on an existing profile.
+- **Add profile** opens the **New profile** form without switching profiles.
+  When you save, the new profile appears on **Who's watching?**.
+- **Manage profiles** switches to the primary profile and opens
+  **Settings > Profiles**.
+
+**Settings > Profiles** lists every profile with **Use** (switch to it),
+**Edit**, and **Delete**. You can also open it from the primary profile's
+settings. You can't delete the primary profile or the profile you're using.
+
+1. Select **New profile**, or **Edit** on an existing profile. If you came
+   from **Add profile**, the form is already open.
 2. Enter a **Name**.
 3. To add a PIN, enter four digits in **PIN (optional)**. On a profile that
    already has a PIN, the field is **New PIN**: type a new PIN to replace it,
