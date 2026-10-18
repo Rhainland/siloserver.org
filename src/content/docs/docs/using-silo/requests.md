@@ -21,9 +21,11 @@ account is allowed to use them. The person who runs the server sets this up in
 4. Follow its progress under **Yours** in the web app, or in the **Your
    requests** row on the Requests page in the other apps.
 
-If a title is already in the library, its page opens the library title
-instead. If you can't request it, the page says why, for example **Request
-limit reached**.
+If a title is already in the library, its page shows **Open in library**
+(**Open in Library** in the Apple and Android apps) instead of the request
+button. If it's already requested, the page shows the request's progress. If
+you can't request it, the page says why, for example **Request limit
+reached**.
 
 ## Get notified about someone else's request
 
