@@ -40,18 +40,25 @@ Seerr shows a user's uploaded Silo profile picture after that user signs in to S
 
 Silo sends Jellyfin user IDs as 32 hex digits without dashes, the way Jellyfin does. Earlier Silo versions added dashes. Seerr recognizes a returning user by that ID, so people who signed in to Seerr before the change no longer match their Seerr account. Depending on Seerr's settings, their sign-in is refused or Seerr creates a second account for them.
 
-Fix this once, after updating Silo:
+Fix this once. If Seerr lets new Jellyfin users sign in, stop it before you update Silo so no one signs in before you've run the fix.
 
-1. Stop Seerr and back up its database.
-2. Run this statement against the database. It works on Seerr's SQLite and PostgreSQL databases:
+1. If Seerr was running after the update, look for second accounts it created. Run this against Seerr's database:
 
    ```sql
-   UPDATE "user" SET "jellyfinUserId" = REPLACE("jellyfinUserId", '-', '') WHERE "jellyfinUserId" LIKE '%-%';
+   SELECT "id", "email", "jellyfinUsername" FROM "user" WHERE "jellyfinUserId" IN (SELECT REPLACE("jellyfinUserId", '-', '') FROM "user" WHERE "jellyfinUserId" LIKE '%-%');
    ```
 
-3. Start Seerr and sign in again.
+   Each row is a new account for someone who already has one. Delete those accounts on Seerr's **Users** page.
+2. Stop Seerr and back up its database.
+3. Run this statement against the database. It also updates the avatar address Seerr saved for each user:
 
-Jellyfin apps that signed in before the change keep working without this step.
+   ```sql
+   UPDATE "user" SET "jellyfinUserId" = REPLACE("jellyfinUserId", '-', ''), "avatar" = REPLACE("avatar", "jellyfinUserId", REPLACE("jellyfinUserId", '-', '')) WHERE "jellyfinUserId" LIKE '%-%';
+   ```
+
+4. Start Seerr.
+
+Both statements work on Seerr's SQLite and PostgreSQL databases. Jellyfin apps that signed in before the change keep working without this step.
 
 ## Legacy Autoscan
 

@@ -42,6 +42,7 @@ Migrations stop after 20 minutes by default. For a very large library, or when t
 - Sign in as an admin and as a normal account.
 - Open a library, load artwork, start playback, seek, stop, and resume.
 - Test the integrations and remote nodes you use.
+- If Seerr refuses sign-ins or creates second accounts for existing users after the update, [relink your Seerr users](/docs/third-party-access#relink-users-after-the-user-id-change).
 
 Keep the backup until these checks pass.
 
@@ -67,4 +68,3 @@ What to expect:
 - Have the matching 1.0 app builds ready for your devices.
 - Playback, download, callback, and integration URLs created by the alpha server stop working. Create new ones from the 1.0 server and update external services such as autoscan and webhook senders. Don't edit old URLs by hand.
 - Health checks keep their addresses, `/api/v1/health` and `/api/v1/ready`.
-- If people sign in to Seerr with their Silo accounts, [relink them once](/docs/third-party-access#relink-users-after-the-user-id-change) after the update.
