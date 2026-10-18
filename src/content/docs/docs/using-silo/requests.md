@@ -16,8 +16,8 @@ account is allowed to use them. The person who runs the server sets this up in
    apps, choose **Requests** in the top menu. Search results also offer
    titles you can request.
 2. Search for the title. Open the result with the right year and type.
-3. Select **Request movie** or **Request series** (**Request Movie** or
-   **Request Series** in the Apple apps, **Request** in the Android apps).
+3. Select **Request movie** or **Request series** (**Request** in the Apple
+   and Android apps).
 4. Follow its progress under **Yours** in the web app, **My Requests** in the
    phone and tablet apps, or the **Your requests** row on the TV apps'
    Requests page.
