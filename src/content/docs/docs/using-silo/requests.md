@@ -18,9 +18,8 @@ account is allowed to use them. The person who runs the server sets this up in
 2. Search for the title. Open the result with the right year and type.
 3. Select **Request movie** or **Request series** (**Request** in the Apple
    and Android apps).
-4. Follow its progress under **Yours** in the web app, **My Requests** in the
-   phone and tablet apps, or the **Your requests** row on the TV apps'
-   Requests page.
+4. Follow its progress under **Yours** in the web app, or in the **Your
+   requests** row on the Requests page in the other apps.
 
 If a title is already in the library, its page opens the library title
 instead. If you can't request it, the page says why, for example **Request
