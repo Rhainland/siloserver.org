@@ -17,6 +17,7 @@ Update during a quiet period and tell users that playback will stop briefly.
 
    Keep that output. `latest` won't identify the old image once you've pulled a new one.
 3. Let active playback and downloads finish.
+4. If people sign in to Seerr with their Silo accounts and you haven't [relinked them](/docs/third-party-access#relink-users-after-the-user-id-change) yet, read that section first. Some setups need Seerr stopped before the update.
 
 ## Update the default Compose stack
 
@@ -42,7 +43,6 @@ Migrations stop after 20 minutes by default. For a very large library, or when t
 - Sign in as an admin and as a normal account.
 - Open a library, load artwork, start playback, seek, stop, and resume.
 - Test the integrations and remote nodes you use.
-- If Seerr refuses sign-ins or creates second accounts for existing users after the update, [relink your Seerr users](/docs/third-party-access#relink-users-after-the-user-id-change).
 
 Keep the backup until these checks pass.
 

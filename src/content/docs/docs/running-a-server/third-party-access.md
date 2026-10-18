@@ -34,7 +34,7 @@ Apps differ in which Jellyfin features they use, so note the app and server vers
 
 Seerr (formerly Jellyseerr) connects to Silo as a Jellyfin server. During Seerr setup, choose Jellyfin and enter the host, port, and HTTPS setting from the address you set in **Address Jellyfin apps should use**.
 
-Seerr shows a user's uploaded Silo profile picture after that user signs in to Seerr with their Silo account. Users with a built-in avatar get Seerr's default picture. If all of a user's Jellyfin sign-ins end, for example after a password change, Seerr shows its default picture until they sign in to a Jellyfin app or Seerr again.
+Seerr shows a user's uploaded Silo profile picture after that user signs in to Seerr with their Silo account. Users with a built-in avatar get Seerr's fallback instead: the Gravatar for their Seerr email, or a generic picture. If all of a user's Jellyfin sign-ins end, for example after a password change, Seerr shows that fallback until they sign in to a Jellyfin app or Seerr again.
 
 ### Relink users after the user ID change
 
@@ -42,14 +42,14 @@ Silo sends Jellyfin user IDs as 32 hex digits without dashes, the way Jellyfin d
 
 Fix this once. If Seerr lets new Jellyfin users sign in, stop it before you update Silo so no one signs in before you've run the fix.
 
-1. If Seerr was running after the update, look for second accounts it created. Run this against Seerr's database:
+1. Stop Seerr and back up its database.
+2. If Seerr was running after the update, look for second accounts it created. Run this against Seerr's database:
 
    ```sql
    SELECT "id", "email", "jellyfinUsername" FROM "user" WHERE "jellyfinUserId" IN (SELECT REPLACE("jellyfinUserId", '-', '') FROM "user" WHERE "jellyfinUserId" LIKE '%-%');
    ```
 
-   Each row is a new account for someone who already has one. Delete those accounts on Seerr's **Users** page.
-2. Stop Seerr and back up its database.
+   Each row is a new account for someone who already has one. To remove them, start Seerr, delete those accounts on its **Users** page, and stop Seerr again. Deleting an account also deletes its requests, so tell those people to request the titles again afterwards.
 3. Run this statement against the database. It also updates the avatar address Seerr saved for each user:
 
    ```sql
