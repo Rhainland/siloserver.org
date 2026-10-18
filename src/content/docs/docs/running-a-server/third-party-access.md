@@ -30,6 +30,29 @@ Give people their Silo credentials and the [Jellyfin sign-in instructions](/docs
 
 Apps differ in which Jellyfin features they use, so note the app and server versions when you report a problem.
 
+## Seerr
+
+Seerr (formerly Jellyseerr) connects to Silo as a Jellyfin server. During Seerr setup, choose Jellyfin and enter the host, port, and HTTPS setting from the address you set in **Address Jellyfin apps should use**.
+
+Seerr shows a user's uploaded Silo profile picture after that user signs in to Seerr with their Silo account. Users with a built-in avatar get Seerr's default picture. If all of a user's Jellyfin sign-ins end, for example after a password change, Seerr shows its default picture until they sign in to a Jellyfin app or Seerr again.
+
+### Relink users after the user ID change
+
+Silo sends Jellyfin user IDs as 32 hex digits without dashes, the way Jellyfin does. Earlier Silo versions added dashes. Seerr recognizes a returning user by that ID, so people who signed in to Seerr before the change no longer match their Seerr account. Depending on Seerr's settings, their sign-in is refused or Seerr creates a second account for them.
+
+Fix this once, after updating Silo:
+
+1. Stop Seerr and back up its database.
+2. Run this statement against the database. It works on Seerr's SQLite and PostgreSQL databases:
+
+   ```sql
+   UPDATE "user" SET "jellyfinUserId" = REPLACE("jellyfinUserId", '-', '') WHERE "jellyfinUserId" LIKE '%-%';
+   ```
+
+3. Start Seerr and sign in again.
+
+Jellyfin apps that signed in before the change keep working without this step.
+
 ## Legacy Autoscan
 
 An external Autoscan service connects through the Jellyfin port. New setups should use Silo's built-in [Autoscan sources](/docs/autoscan) instead.

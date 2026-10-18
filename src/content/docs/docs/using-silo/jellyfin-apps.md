@@ -112,3 +112,8 @@ Jellyfin-compatible apps are for movies and series. An app may use features
 Silo doesn't provide. When reporting a problem, include the app's name and
 version, what you were doing, and whether it works in Silo's web app. Leave
 out passwords and PINs.
+
+If you uploaded a picture for your profile, the app shows it. Built-in
+avatars you picked in Silo don't carry over, and the app shows its own default
+picture instead. After you upload a new picture, some apps take up to an hour
+to show it.

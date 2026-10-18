@@ -67,3 +67,4 @@ What to expect:
 - Have the matching 1.0 app builds ready for your devices.
 - Playback, download, callback, and integration URLs created by the alpha server stop working. Create new ones from the 1.0 server and update external services such as autoscan and webhook senders. Don't edit old URLs by hand.
 - Health checks keep their addresses, `/api/v1/health` and `/api/v1/ready`.
+- If people sign in to Seerr with their Silo accounts, [relink them once](/docs/third-party-access#relink-users-after-the-user-id-change) after the update.
