@@ -19,11 +19,11 @@ These are server-wide defaults. An [access group](/docs/manage-access) can set i
 
 ## Review a request
 
-Requests are reviewed in the web app only. The phone, tablet, and TV apps don't show approval controls, even to admins.
+Review requests in the web app. The phone, tablet, and TV apps don't have approval controls, even for admins.
 
 1. Open **Admin > Requests**. **Needs approval** lists requests waiting for a decision.
 2. Choose **Approve**, or **Decline**. When you decline, you can add a reason for the requester.
-3. After adding the media, scan the library. Within a few minutes of the new item being matched, the request shows as available, and everyone who requested it or asked to be notified is told.
+3. After adding the media, scan the library. Within a few minutes of Silo matching the new item, the request shows as available, and Silo notifies the requester and everyone who asked to be notified.
 
 If it stays unfulfilled, compare the library match with the requested movie, series, or season. A title with a similar name may be a different item.
 
