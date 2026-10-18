@@ -68,9 +68,14 @@ PostgreSQL is required. Redis is optional for a single `integrated` or `api` ser
 
 If several Silo installs share one Redis server, give each install its own database number in `REDIS_URL`. The number is the URL's path, such as `1` in `redis://redis.example.com:6379/1`, and a URL without one uses database 0. The main server and every node of one install use the same number. Installs on the same number mix their cached data and events, such as settings changes and live log rows.
 
-If you set up Redis in **Admin > Settings > Storage & Database** or the setup wizard instead of with `REDIS_URL`, the **Database number** field below **Connection URL** replaces the number in the URL. It shows the number in use, so give each node's `REDIS_URL` that number. Changing it requires a restart and switches Silo to another database without moving existing data.
+If you set up Redis in **Admin > Settings > General** or the setup wizard instead of with `REDIS_URL`, the **Database number** field below **Connection URL** replaces the number in the URL. It shows the number in use, so give each node's `REDIS_URL` that number. Changing it requires a restart and switches Silo to another database without moving existing data.
 
-If your Redis user is restricted by an ACL, grant it the channel pattern `&silo:*`. On a database number other than 0, Silo adds the number to its channel names, such as `silo:catalog@db1`. A user granted only the plain names (`silo:catalog`, `silo:admin`, `silo:playback`, `silo:logs`, and `silo:events`) is refused with a `NOPERM` error, and Silo exits at startup. Database 0 uses the plain names.
+Start Redis before you set it up in either place. When you save a new **Connection URL** or **Database number**, Silo first connects with the new value. If it can't, Silo refuses the save and stores nothing, so it isn't left with a setting it can't start with. A number your Redis server doesn't have, such as 16 on a Redis with the default 16 databases, is refused too. Check these for each error:
+
+- `Redis refused the connection, ...`: the database number, and the user name and password in the URL.
+- `Silo could not connect to Redis with these settings, ...`: that Redis is running, and the host and port in the URL.
+
+If your Redis user is restricted by an ACL, grant it the channel pattern `&silo:*`. On a database number other than 0, Silo adds the number to its channel names, such as `silo:catalog@db1`. Database 0 uses the plain names. A user granted only the plain names (`silo:catalog`, `silo:admin`, `silo:playback`, `silo:logs`, and `silo:events`) is refused with a `NOPERM` error. With `REDIS_URL`, Silo then exits at startup. In the admin settings or the setup wizard, the save is refused with `Redis refused a subscription to Silo's event channels, ...`.
 
 To use [Valkey](https://valkey.io/) in place of Redis, set `REDIS_URL` to your Valkey server with a `redis://` URL. There is no Valkey-specific setting. Silo is tested only against Redis, so Valkey support is provided as-is.
 
@@ -88,7 +93,7 @@ redis://sentinel-1:26379/1?master_name=mymaster&addr=sentinel-2:26379&addr=senti
 - A user name and password before the host sign in to Sentinel. The `username` and `password` parameters sign in to the Redis servers. Percent-encode reserved characters in them, and write a plus sign as `%2B`.
 - With `rediss://`, every Sentinel and Redis server needs a certificate that's valid for the host name in the URL.
 
-Silo follows a new master after a failover without a restart. The **Connection URL** field in the **Redis** group of **Admin > Settings > Storage & Database** takes the same URL.
+Silo follows a new master after a failover without a restart. The **Connection URL** field in the **Redis** group of **Admin > Settings > General** takes the same URL.
 
 ### Shared memory for your own PostgreSQL container
 
