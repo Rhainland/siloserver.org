@@ -37,6 +37,8 @@ Changed fields show their old and new values, and permission changes list the pe
 
 If an administrator acted as another account, **Actor** shows both, for example `#1 (as #7)`, where #1 is the administrator. Filtering by actor finds the administrator, not the account they acted as. The filters are kept in the page address, so a shared link shows the account IDs you filtered by.
 
+A **Status** of `499` means the client closed the connection before Silo finished answering, for example when someone leaves a page while it loads. Silo doesn't send it; it only records it. A server error that happens after the client has left is recorded as 499 too, so check the **Application** tab around the same time for the cause.
+
 ## Log settings
 
 On **Admin > Logs > Settings**, under **Server log**:
