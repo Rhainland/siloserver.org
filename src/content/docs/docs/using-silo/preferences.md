@@ -73,7 +73,9 @@ maximum bitrate** under **Picture**.
    using says **This device**.
 2. Change any setting it lists, such as quality, subtitle language, playing
    the next episode, HDR, or the audio sync offset. Each setting says where its value comes
-   from: **Changed here**, **From your profile**, or **App default**. A
+   from: **Changed here**, **From your profile**, or **App default**.
+   **Show title art** says **Server default** instead of **App default**,
+   because your server's administrator can change its default. A
    changed setting shows **Use your setting**; select it to go back to your
    profile's value. **Use profile settings** removes every change on the
    device.
@@ -93,7 +95,10 @@ Profile Settings** at the bottom of the page removes every change on the
 device.
 
 A setting changed on a device wins over your profile's value on that device,
-except **Show title art** while **Apply to all devices** is on. If a single
+except **Show title art** while **Apply to all devices** is on. In the web
+app, **Use server default** appears under **Show title art** on **Settings >
+Title Pages** once you've chosen your own setting. It returns this browser to
+your server's default; other devices keep their own choice. If a single
 title plays differently from others, look at the audio and subtitle tracks
 chosen for it during playback before you change the whole profile.
 
