@@ -102,6 +102,13 @@ Try signing in to Silo's web app with the same username and password. If
 that works, the problem is in the Jellyfin-compatible sign-in; share the
 error with the person who runs your server.
 
+Silo limits repeated sign-in attempts. If the app says there were too many
+requests, wait and sign in again. After 10 failed sign-ins with the same
+username within 15 minutes, Silo locks the username for 15 minutes in every
+app, and even the right password fails until then. See
+[After too many failed sign-ins](/docs/accounts#after-too-many-failed-sign-ins).
+A password with `#` in it, such as one with a PIN added, counts as two tries.
+
 If the app reports that local password sign-in is turned off on this server,
 your Silo password no longer works there. See
 [If you don't use a Silo password](#if-you-dont-use-a-silo-password).
