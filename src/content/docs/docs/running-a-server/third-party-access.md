@@ -32,7 +32,7 @@ Apps differ in which Jellyfin features they use, so note the app and server vers
 
 ## Seerr
 
-Seerr (formerly Jellyseerr) connects to Silo as a Jellyfin server, but Seerr's setup doesn't accept a Silo account yet. Setup needs an administrator account on the media server, and Silo doesn't report any account as an administrator to Jellyfin apps, so setup stops with an error. Once Seerr is connected to Silo, people sign in to Seerr with their Silo accounts, the same way they [sign in to Jellyfin apps with a profile](/docs/jellyfin-apps#sign-in-with-your-profile).
+Seerr (formerly Jellyseerr) connects to Silo as a Jellyfin server, but its setup can't finish with a Silo account. Setup needs an administrator account on the media server, and Silo doesn't report any account as an administrator to Jellyfin apps, so setup stops with an error. If your Seerr already connects to Silo, people sign in to Seerr with their Silo accounts, the same way they [sign in to Jellyfin apps with a profile](/docs/jellyfin-apps#sign-in-with-your-profile).
 
 Seerr shows a user's uploaded Silo profile picture after that user signs in to Seerr with their Silo account. Users with a preset avatar get Seerr's fallback instead: the Gravatar for their Seerr email, or a generic picture. Seerr also shows the fallback once none of the user's Jellyfin sign-ins is active, for example after a password reset or **Sign out everywhere**, or 30 days after they last signed in to Seerr if they don't use a Jellyfin app. Signing in to Seerr or a Jellyfin app again brings the picture back.
 
