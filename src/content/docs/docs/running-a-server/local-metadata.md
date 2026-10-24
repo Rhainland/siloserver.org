@@ -39,10 +39,18 @@ Put images beside the media with these names. Each name can end in `.jpg`, `.jpe
 | --- | --- |
 | Movie poster | `<media basename>-poster`, then `poster`, `folder`, `cover`, `default`, or `movie` in the movie folder |
 | Series poster | `poster`, `folder`, `cover`, `default`, or `show` in the show folder |
-| Background | `<media basename>-fanart` for a movie, then `fanart`, `backdrop`, `background`, or `art` |
+| Background | `<media basename>-fanart` for a movie, then `fanart`, `backdrop`, `background`, or `art`. More backgrounds can follow, as described below the table. |
 | Logo | `<media basename>-logo` or `<media basename>-clearlogo` for a movie, then `logo` or `clearlogo` |
+| Banner | `<media basename>-banner` for a movie, then `banner` |
+| Landscape thumbnail | `<media basename>-landscape` or `<media basename>-thumb` for a movie, then `landscape`, then `thumb` |
+| Clear art | `<media basename>-clearart` for a movie, then `clearart` |
+| Disc art | Movies only: `<media basename>-disc`, `<media basename>-cdart`, or `<media basename>-discart`, then `disc`, `cdart`, or `discart` |
 | Season poster | `poster`, `folder`, or `cover` inside the season folder, or `seasonNN-poster` in the show folder, such as `season01-poster.jpg`. Specials also accept `season-specials-poster`. |
 | Episode image | `<episode basename>-thumb`, then `<episode basename>`, beside the video |
+
+A movie or show can have up to 20 backgrounds. The first name from the table that Silo finds is the main background. Numbered images come next: `fanart-1`, `fanart-2`, and so on (Kodi's `fanart1` works too), then `background-1` and up, `art-1` and up, and `backdrop1` and up. Silo stops looking for a numbered name after three missing numbers in a row. Images in an `extrafanart` folder in the title's folder come last, in name order. Silo doesn't read images from a `backdrops` folder, which Jellyfin uses for theme videos.
+
+[Jellyfin apps](/docs/jellyfin-apps) can show all of these images, including every background.
 
 Silo uses these images only while **Local metadata (NFO + artwork)** is on for the library, but an image works without an `.nfo` file. When a local image is present, Silo prefers it over images from every online provider, including for viewers who use another metadata language. Silo skips empty files, files over 25 MiB, and symbolic links.
 
@@ -52,7 +60,7 @@ If the library's folder can't be reached during a refresh, such as a network sha
 
 After you replace an image, refresh the item.
 
-For a movie or series, the **Images** list in **Edit Metadata** also offers these images, marked **LOCAL**, even when **Local metadata (NFO + artwork)** is off for the library. The list follows the rules above, so files they skip don't appear. Apply one as you would a provider image, as described in [Choose artwork](/docs/metadata#choose-artwork).
+For a movie or series, the **Images** list in **Edit Metadata** also offers the local posters, backgrounds, and logos, marked **LOCAL**, even when **Local metadata (NFO + artwork)** is off for the library. The list follows the rules above, so files they skip don't appear. Apply one as you would a provider image, as described in [Choose artwork](/docs/metadata#choose-artwork).
 
 If **Could not load from LOCAL** appears above the images, Silo couldn't read some of the title's local images, for example because the title's folder is a symbolic link to a place outside the library's folders. Silo leaves them out of the list.
 
