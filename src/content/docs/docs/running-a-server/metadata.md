@@ -41,6 +41,16 @@ Editing a lockable field locks it, so providers leave it alone during a refresh.
 
 **Reset & Refresh** clears every lock and replaces your manual edits with provider data.
 
+## Choose a fallback language
+
+When a metadata provider has no title or description in a library's **Metadata Language**, Silo uses English by default before the title's original language. For example, when an anime has no Spanish text, a Spanish library shows the series and its episodes with English titles and descriptions.
+
+To use another language for every library, open **Admin > Libraries > Settings** and choose it in **Fallback metadata language** under **General**. Choose **Original language** to show the original language instead.
+
+While the fallback is on, Silo picks posters in this order: the library's language, the fallback language, English, a poster without text, then any other language.
+
+New items use the setting right away. Items already in a library change when you refresh them: choose **Refresh Metadata** from an item's actions menu and then **Quick Refresh**, or select the library's **Rescan Metadata** button in **Admin > Libraries** and then **Refresh All Metadata**.
+
 ## Translate a description
 
 This needs a text model and **Translate descriptions** turned on in [AI Services](/docs/ai-services).
