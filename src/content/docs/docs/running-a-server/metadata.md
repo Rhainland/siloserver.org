@@ -63,7 +63,9 @@ You don't have to translate a library ahead of time. To translate while people b
 
 ## Choose artwork
 
-In **Edit Metadata**, open **Images** for a movie, series, or season. Choose the image type, select a provider image, and choose **Apply**. The image changes immediately, and **Cancel** doesn't undo it. Look at the item's details page and the library grid afterward. Only administrators can change images.
+In **Edit Metadata**, open **Images** for a movie, series, or season. Choose the image type, select an image, and choose **Apply Poster**, **Apply Backdrop**, or **Apply Logo**. The image changes immediately, and **Cancel** doesn't undo it. Look at the item's details page and the library grid afterward. Only administrators can change images.
+
+A badge on each image names where it comes from, such as **TMDB**. A movie or series also offers the artwork stored beside its files, marked **LOCAL** and listed first, so a title with no provider match can still use its own [artwork](/docs/local-metadata#add-artwork). When the images come from more than one source, buttons such as **All**, **LOCAL**, and **TMDB** appear under the image types. Select one to show only that source's images.
 
 If images don't appear, check [artwork storage](/docs/s3-storage).
 
